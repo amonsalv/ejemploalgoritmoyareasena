@@ -1,8 +1,27 @@
-function showInputs() {
+/**
+ * Calcula el área y el volumen de diferentes figuras geométricas basadas en la selección del usuario.
+ * Actualiza el contenido del elemento con id "resultado" con el área y volumen calculados.
+ * 
+ * Las figuras soportadas son:
+ * 1. Cuadrado
+ * 2. Rectángulo
+ * 3. Círculo
+ * 4. Triángulo
+ * 5. Cubo
+ * 6. Prisma rectangular
+ * 
+ * Para cada figura, se espera que los valores necesarios sean ingresados en los elementos de entrada correspondientes.
+ * 
+ */
+
+// Eventos en html
+// Muestra los campos de entrada necesarios para cada figura
+function showInputs() { 
     const figura = parseInt(document.getElementById("figura").value);
     const inputsDiv = document.getElementById("inputs");
     inputsDiv.innerHTML = "";
 
+    // Validar que se haya seleccionado una figura
     switch (figura) {
         case 1:  // Cuadrado
             inputsDiv.innerHTML = `
@@ -53,10 +72,19 @@ function showInputs() {
     }
 }
 
+// Calcula el área y el volumen de la figura seleccionada
 function calculateAreaVolume() {
     const figura = parseInt(document.getElementById("figura").value);
     let area, volumen, resultado = "";
 
+    // Validar que se haya seleccionado una figura
+    if (!figura) {
+        document.getElementById("resultado").innerHTML = "Por favor seleccione una figura";
+        return;
+    }
+
+
+    // Calcular el área y el volumen de la figura seleccionada
     switch (figura) {
         case 1:  // Cuadrado
             const ladoCuadrado = parseFloat(document.getElementById("ladoCuadrado").value);
@@ -104,9 +132,4 @@ function calculateAreaVolume() {
 
     document.getElementById("resultado").innerHTML = resultado;
 
-    const repetir = confirm("¿Desea realizar otro cálculo?");
-    if (repetir) {
-        showInputs();
-        document.getElementById("resultado").innerHTML = "";
-    }
 }
